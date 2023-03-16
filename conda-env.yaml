@@ -1,0 +1,11 @@
+name: xnn
+channels:
+  - defaults
+dependencies:
+  - python=3.10.9
+  - pip=23.0.1
+  - pip:
+      - pandas==1.5.2
+      - numpy==1.24.1
+      - pylint==2.15.0
+      - pytest-cov==4.0.0
