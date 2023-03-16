@@ -43,7 +43,7 @@ unzip -q pneumonia.zip -d data/
 
 Please ensure dependencies adhere to python 3.10
 ```bash
-conda create -n xnn python=3.10
+conda env create -f conda-env.yaml
 conda activate xnn
 ```
 1. Pre-commit hook
