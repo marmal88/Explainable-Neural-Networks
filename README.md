@@ -6,7 +6,7 @@
 
 # Introduction
 
-Following is the initial file structure. Python
+Following is the initial file structure. 
 # Folders/File structure 
 ```bash
 .
