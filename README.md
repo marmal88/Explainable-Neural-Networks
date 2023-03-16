@@ -43,7 +43,7 @@ unzip -q pneumonia.zip -d data/
 
 Please ensure dependencies adhere to python 3.10
 ```bash
-conda create -n xnn python=3.10
+conda env create -f conda-env.yaml
 conda activate xnn
 ```
 1. Pre-commit hook
@@ -56,3 +56,10 @@ pre-commit install
 # Contributing
 - Outstanding features are listed in the project's kanban board [here](https://github.com/users/marmal88/projects/4/views/2)!
 - Dont see an issue you want? raise an issue [here](https://github.com/marmal88/Explainable-Neural-Networks/issues)
+
+## Commit msg
+<type>: <short summary>
+  │            │
+  │            └─⫸ Summary in present tense. Not capitalized. No period at the end.
+  │
+  └─⫸ Commit Type: build|cicd|docs|feat|fix|node|refactor|test
