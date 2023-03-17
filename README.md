@@ -58,8 +58,10 @@ pre-commit install
 - Dont see an issue you want? raise an issue [here](https://github.com/marmal88/Explainable-Neural-Networks/issues)
 
 ## Commit msg
+```
 <type>: <short summary>
   │            │
   │            └─⫸ Summary in present tense. Not capitalized. No period at the end.
   │
   └─⫸ Commit Type: build|cicd|docs|feat|fix|node|refactor|test
+```
