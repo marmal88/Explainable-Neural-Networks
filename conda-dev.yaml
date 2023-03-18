@@ -1,0 +1,22 @@
+name: xnn
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - pylint
+      - pytest-cov
+      - black
+      - ipykernel
+      - tqdm
+      - pre-commit
+      - hydra-core
+      - numpy
+      - pandas
+      - torch
+      - torchvision
+      - lightning
+      - albumentations
+      - jsonargparse[signatures]
+
