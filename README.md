@@ -36,8 +36,9 @@ Curl down and unzip the data to the existing repositry using the command:
 # download using
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1BLViYnohD-S4u5p1DkXp1MOlCGe02w36' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1BLViYnohD-S4u5p1DkXp1MOlCGe02w36" -O pneumonia.zip && rm -rf /tmp/cookies.txt
 # Unzip using
-unzip -q pneumonia.zip -d data/
+unzip -q pneumonia.zip .
 ```
+Alternatively download the dataset from [here](https://drive.google.com/file/d/1BLViYnohD-S4u5p1DkXp1MOlCGe02w36/view?usp=share_link).
 
 2. Environment
 
