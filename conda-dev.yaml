@@ -17,6 +17,5 @@ dependencies:
       - torch
       - torchvision
       - lightning[extra]
-      - albumentations
       - jsonargparse[signatures]
 
