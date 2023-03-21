@@ -84,10 +84,6 @@ docker container stop fiftyone
 docker rm fiftyone   
 ```
 
-docker run -it -p 5151:5151 \
-    -v ~/Documents/coding/personal/Explainable-Neural-Networks/data:/data \
-    --entrypoint /bin/bash \
-    fiftyone:0.1.0    
 
 # Contributing
 - Outstanding features are listed in the project's kanban board [here](https://github.com/users/marmal88/projects/4/views/2)!
