@@ -19,4 +19,5 @@ dependencies:
       - lightning
       - albumentations
       - jsonargparse[signatures]
-
+      - opencv-python
+      - matplotlib
