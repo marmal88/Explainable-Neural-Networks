@@ -2,7 +2,7 @@ name: xnn
 channels:
   - defaults
 dependencies:
-  - python=3.11
+  - python=3.10
   - pip
   - pip:
       - pylint
@@ -16,8 +16,9 @@ dependencies:
       - pandas
       - torch
       - torchvision
-      - lightning
-      - albumentations
+      - lightning[extra]
       - jsonargparse[signatures]
-      - opencv-python
+      - hydra-core==1.1.1
+      - hydra-optuna-sweeper==1.1.1
+      - optuna==2.10.0      - opencv-python
       - matplotlib

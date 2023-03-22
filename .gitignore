@@ -132,4 +132,8 @@ dmypy.json
 .pyre/
 
 lightning_logs/
+logs/
 
+# Ignore outputs from OmegaConf/Hydra
+**/outputs
+**/multirun

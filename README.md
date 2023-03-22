@@ -54,6 +54,37 @@ More information on precommit hook [here](https://pre-commit.com/).
 pre-commit install
 ```
 
+
+# FiftyOne
+
+FiftyOne is a widely used solution to quickly view multiple images for computer vision tasks. Please run the following commands in docker to view the data, data has already been tagged with both "normal", "bacteria" and "virus" images for quick comparison. 
+
+1. Build the service using the command:
+```bash
+docker build -f docker/fiftyone.Dockerfile \
+    -t fiftyone:0.1.0 \
+    --platform linux/amd64 .  
+```
+2. Run the service using the command:
+```bash
+docker run -p 5151:5151 \
+    --name fiftyone \
+    -v ~/Documents/coding/personal/Explainable-Neural-Networks/data:/data \
+    fiftyone:0.1.0    
+```
+3. Access the fiftyone dashboard using the link [http://localhost:5151](http://localhost:5151) on your local computer
+
+4. Stop the service using the command:
+```bash
+docker container stop fiftyone   
+
+```
+5. To remove the container use the command:
+```bash
+docker rm fiftyone   
+```
+
+
 # Contributing
 - Outstanding features are listed in the project's kanban board [here](https://github.com/users/marmal88/projects/4/views/2)!
 - Dont see an issue you want? raise an issue [here](https://github.com/marmal88/Explainable-Neural-Networks/issues)
