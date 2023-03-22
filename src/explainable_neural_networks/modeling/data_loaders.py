@@ -5,13 +5,13 @@ import torchvision.transforms as T
 
 class ImageClassificationDataModule(LightningDataModule):
     def __init__(
-            self,
+            self,            
+            train_data_path: str,
+            validation_data_path: str,
+            test_data_path: str,
             train_transform_img: T.Compose,
             test_transform_img: T.Compose,
             batch_size: int = 32,
-            train_data_path: str = "../data/train",
-            validation_data_path: str = "../data/val",
-            test_data_path: str = "../data/test",
             ):
         super().__init__()
         self.train_dataset = torchvision.datasets.ImageFolder(
