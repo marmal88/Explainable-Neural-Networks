@@ -84,6 +84,20 @@ docker container stop fiftyone
 docker rm fiftyone   
 ```
 
+# t-SNE
+
+t-Distributed Stochastic Neighbor Embedding (t-SNE) is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. In this project, a t-SNE vizualization has been created to better allow users to understand the images.
+
+<p align="center">
+  <img src="./assets/ResNet101/sprite.jpg" width="600" height="500">
+  <p style="text-align: center;">(Above) Image sprite showing the images being classified using RESNET embeddings</p>
+</p>
+<p align="center">
+  <img src="./assets/images/tsne.png" width="600" height="400">
+  <p style="text-align: center;">(Above) Tensorboard showing t-SNE clustering according to the categories "normal", "bacteria" and "virus". </p>
+</p>
+
+
 
 # Contributing
 - Outstanding features are listed in the project's kanban board [here](https://github.com/users/marmal88/projects/4/views/2)!
