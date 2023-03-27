@@ -54,8 +54,8 @@ More information on precommit hook [here](https://pre-commit.com/).
 pre-commit install
 ```
 
-
-# FiftyOne
+# EDA
+## 1. FiftyOne
 
 FiftyOne is a widely used solution to quickly view multiple images for computer vision tasks. Please run the following commands in docker to view the data, data has already been tagged with both "normal", "bacteria" and "virus" images for quick comparison. 
 
@@ -82,6 +82,27 @@ docker container stop fiftyone
 5. To remove the container use the command:
 ```bash
 docker rm fiftyone   
+```
+
+# Setting Up Infrastructure
+
+## 1. MLFlow on GCP
+In this project we use MLflow as our primary database to log model training performance.
+
+
+### 1. Set up glcoud infrastructure
+Please follow the following steps to get started on google cloud
+
+
+
+
+
+
+Build MLflow locally and push to bucket:
+```bash
+docker build -f docker/mlflow.Dockerfile \
+  -t mlflow:latest \
+  --platform linux/amd64 .
 ```
 
 
