@@ -27,15 +27,10 @@ class PneumoniaDataset(Dataset):
         image_path = os.path.join(self.image_folder, row["file_path"])
         image = Image.open(image_path).convert("RGB")
 
-        print(f" transform is {self.transform is not None}")
         if self.transform is not None:
             image = self.transform(image)
-        print(image)
-
-        item = {"image": image}
 
         if self.inference_mode is False:
-            label = row["class"]
-            item["label"] = label
+            label = row["label"]
 
-        return item
+        return image, label

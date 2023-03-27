@@ -13,7 +13,6 @@ from .modeling.preprocess import ImageTransforms
 
 @hydra.main(config_path="../../conf/base", config_name="pipelines.yaml")
 def run(cfg: DictConfig) -> None:
-    logging.info(os.getcwd())
 
     train_transform_img = ImageTransforms(
         cfg.train.transforms.image_size
@@ -21,14 +20,12 @@ def run(cfg: DictConfig) -> None:
     test_transform_img = ImageTransforms(
         cfg.train.transforms.image_size
     ).test_transforms()
-    # logging.info("made transforms")
-    # logging.info(hydra.utils.get_original_cwd())
 
     trainer = Trainer(max_epochs=cfg.train.params.epochs)
     model = ImageClassifier(
         backbone=create_model(), learning_rate=cfg.train.params.learning_rate
     )
-    # logging.info(os.getcwd())
+
     train_data_path = os.path.join(
         hydra.utils.get_original_cwd(), cfg.data_paths.train_data_path
     )

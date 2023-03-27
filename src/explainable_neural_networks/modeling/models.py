@@ -5,8 +5,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from lightning.pytorch import LightningModule
 
+
 class Backbone(nn.Module):
-    def __init__(self, num_classes: int = 2, dropout: float = 0.5):
+    def __init__(self, num_classes: int = 3, dropout: float = 0.5):
         super().__init__()
         self.conv1 = nn.Conv2d(3, 6, 3)
         self.pool = nn.MaxPool2d(2, 2)
@@ -29,8 +30,8 @@ class Backbone(nn.Module):
         x = torch.flatten(x, 1)  # flatten all dimensions except batch
         x = self.classifier(x)
         return x
-    
-    
+
+
 class ImageClassifier(LightningModule):
     def __init__(
         self, backbone: Optional[Backbone] = None, learning_rate: float = 0.0001
