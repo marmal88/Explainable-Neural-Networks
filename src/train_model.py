@@ -11,7 +11,7 @@ from .modeling.models import ImageClassifier
 from .modeling.preprocess import ImageTransforms
 
 
-@hydra.main(config_path="../../conf/base", config_name="pipelines.yaml")
+@hydra.main(config_path="../conf/base", config_name="pipelines.yaml")
 def run(cfg: DictConfig) -> None:
     logging.info(os.getcwd())
 
