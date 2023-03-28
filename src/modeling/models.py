@@ -3,6 +3,7 @@ from typing import Optional
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torchmetrics
 from lightning.pytorch import LightningModule
 
 
@@ -34,37 +35,58 @@ class Backbone(nn.Module):
 
 class ImageClassifier(LightningModule):
     def __init__(
-        self, backbone: Optional[Backbone] = None, learning_rate: float = 0.0001
+        self,
+        backbone: Optional[Backbone] = None,
+        learning_rate: float = 0.0001,
+        num_classes: int = 3,
     ):
         super().__init__()
         self.save_hyperparameters(ignore=["backbone"])
         if backbone is None:
             backbone = Backbone()
-        self.backbone = backbone
+        self.model = backbone
+
+        self.train_acc = torchmetrics.Accuracy(
+            task="multiclass", num_classes=num_classes
+        )
+        self.val_acc = torchmetrics.Accuracy(task="multiclass", num_classes=num_classes)
+        self.test_acc = torchmetrics.Accuracy(
+            task="multiclass", num_classes=num_classes
+        )
 
     def forward(self, x):
         # use forward for inference/predictions
-        embedding = self.backbone(x)
-        return embedding
+        return self.model(x)
+
+    def _shared_step(self, batch):
+        features, true_labels = batch
+        logits = self(features)
+
+        loss = F.cross_entropy(logits, true_labels)
+        predicted_labels = torch.argmax(logits, dim=1)
+        return loss, true_labels, predicted_labels
 
     def training_step(self, batch, batch_idx):
-        x, y = batch
-        y_hat = self(x)
-        loss = F.cross_entropy(y_hat, y)
+        loss, true_labels, predicted_labels = self._shared_step(batch)
+
         self.log("train_loss", loss, on_epoch=True)
+        self.train_acc(predicted_labels, true_labels)
+        self.log(
+            "train_acc", self.train_acc, prog_bar=True, on_epoch=True, on_step=False
+        )
         return loss
 
     def validation_step(self, batch, batch_idx):
-        x, y = batch
-        y_hat = self(x)
-        loss = F.cross_entropy(y_hat, y)
-        self.log("valid_loss", loss, on_step=True)
+        loss, true_labels, predicted_labels = self._shared_step(batch)
+
+        self.log("val_loss", loss, on_step=True)
+        self.val_acc(predicted_labels, true_labels)
+        self.log("val_acc", self.val_acc, prog_bar=True)
 
     def test_step(self, batch, batch_idx):
-        x, y = batch
-        y_hat = self(x)
-        loss = F.cross_entropy(y_hat, y)
-        self.log("test_loss", loss)
+        loss, true_labels, predicted_labels = self._shared_step(batch)
+        self.test_acc(predicted_labels, true_labels)
+        self.log("accuracy", self.test_acc)
 
     def predict_step(self, batch, batch_idx, dataloader_idx=None):
         x, y = batch

@@ -46,26 +46,19 @@ class ImageClassificationDataModule(LightningDataModule):
             inference_mode=False,
             transform=test_transform_img,
         )
-        # self.train_dataset = torchvision.datasets.ImageFolder(
-        #     root=train_data_path, transform=train_transform_img
-        # )
-        # self.validation_dataset = torchvision.datasets.ImageFolder(
-        #     root=validation_data_path, transform=test_transform_img
-        # )
-        # self.test_dataset = torchvision.datasets.ImageFolder(
-        #     root=test_data_path, transform=test_transform_img
-        # )
 
         self.batch_size = batch_size
 
     def train_dataloader(self):
-        return DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True)
+        return DataLoader(
+            self.train_dataset, batch_size=self.batch_size, num_workers=4, shuffle=True
+        )
 
     def val_dataloader(self):
-        return DataLoader(self.val_dataset, batch_size=self.batch_size)
+        return DataLoader(self.val_dataset, batch_size=self.batch_size, num_workers=4)
 
     def test_dataloader(self):
-        return DataLoader(self.test_dataset, batch_size=self.batch_size)
+        return DataLoader(self.test_dataset, batch_size=self.batch_size, num_workers=4)
 
     def predict_dataloader(self):
-        return DataLoader(self.test_dataset, batch_size=self.batch_size)
+        return DataLoader(self.test_dataset, batch_size=self.batch_size, num_workers=4)
