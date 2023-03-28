@@ -12,14 +12,17 @@ Following is the initial file structure.
 .
 ├── data
 │   ├── test
-│   │   ├── NORMAL
-│   │   └── PNEUMONIA
+│   │   ├── normal
+│   │   ├── bacteria
+│   │   └── virus
 │   ├── train
-│   │   ├── NORMAL
-│   │   └── PNEUMONIA
+│   │   ├── normal
+│   │   ├── bacteria
+│   │   └── virus
 │   └── val
-│       ├── NORMAL
-│       └── PNEUMONIA
+│       ├── normal
+│       ├── bacteria
+│       └── virus
 ├── conda-env.yaml
 ├── src
 ├── LICENSE
