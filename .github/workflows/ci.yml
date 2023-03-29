@@ -30,6 +30,7 @@ jobs:
           $CONDA/bin/conda info --envs
       - name: Lint with Pylint
         run: |
+          $CONDA/bin/activate xnn
           pip install pylint pytest
           pylint src --fail-under=7.0 --ignore=tests --disable=W1202
       - name: Test with pytest
