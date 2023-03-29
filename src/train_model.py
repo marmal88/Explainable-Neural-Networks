@@ -1,3 +1,5 @@
+"""This package runs the model training."""
+
 import logging
 import os
 

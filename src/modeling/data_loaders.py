@@ -1,7 +1,6 @@
-from typing import Optional
+"""This package contains dataloaders for train, validation and test dataset."""
 
 import pandas as pd
-import torchvision
 import torchvision.transforms as T
 from lightning.pytorch import LightningDataModule
 from torch.utils.data import DataLoader
@@ -11,7 +10,8 @@ from .dataset import PneumoniaDataset
 
 class ImageClassificationDataModule(LightningDataModule):
     """
-    Instantialises a LightningDataModule for loading and preprocessing image classification datasets.
+    Instantialises a LightningDataModule for loading and
+    preprocessing image classification datasets.
 
     Args:
         train_image_folder (str): Path to the folder containing training images.

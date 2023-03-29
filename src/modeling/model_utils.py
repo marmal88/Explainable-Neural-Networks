@@ -1,5 +1,8 @@
-import torch.nn as nn
+"""This package contains functions to instantialize a pre-trained neural network
+from torchvision for image classification."""
+
 import torchvision
+from torch import nn as nn
 
 
 def set_parameter_requires_grad(model, feature_extracting: bool = True):
@@ -26,8 +29,10 @@ def create_model(
 
     Args:
         num_classes (int): The number of output classes for the image model.
-        model_name (str): The name of the pre-trained model to use as a base. Defaults to "resnet50".
-        model_weights (str): The weights to use for the pre-trained model. Defaults to "DEFAULT".
+        model_name (str): The name of the pre-trained model to use as a base.
+            Defaults to "resnet50".
+        model_weights (str): The weights to use for the pre-trained model.
+            Defaults to "DEFAULT".
 
     Return:
         model (): A pre-trained neural network model with a custom output layer.

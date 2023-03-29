@@ -1,3 +1,5 @@
+"""This package contains classes for image augmentation."""
+
 from typing import Callable
 
 import torchvision.transforms as T

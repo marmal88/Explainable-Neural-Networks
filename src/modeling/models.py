@@ -1,10 +1,13 @@
+"""This package contains classes to instantialize a model containing
+methods for training."""
+
 from typing import Optional, Tuple
 
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
 import torchmetrics
 from lightning.pytorch import LightningModule
+from torch import nn as nn
 
 
 class Backbone(nn.Module):
@@ -35,22 +38,22 @@ class Backbone(nn.Module):
             nn.Linear(84, num_classes),
         )
 
-    def forward(self, x):
+    def forward(self, input):
         """
         Forward propagation of the model.
 
         Args:
-            x (torch.Tensor): Input tensor of shape (batch size, number of channels, height, width)
+            input (torch.Tensor): Input tensor of shape (batch size, number of channels, height, width)
 
         Returns:
-            x (torch.Tensor): Output after forward propagation of shape (batch size, num_classes)
+            output (torch.Tensor): Output after forward propagation of shape (batch size, num_classes)
         """
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
+        input = self.pool(F.relu(self.conv1(input)))
+        input = self.pool(F.relu(self.conv2(input)))
         # x = self.avgpool(x)
-        x = torch.flatten(x, 1)  # flatten all dimensions except batch
-        x = self.classifier(x)
-        return x
+        input = torch.flatten(input, 1)  # flatten all dimensions except batch
+        output = self.classifier(input)
+        return output
 
 
 class ImageClassifier(LightningModule):
@@ -71,14 +74,16 @@ class ImageClassifier(LightningModule):
     def __init__(
         self,
         backbone: Optional[Backbone] = None,
-        learning_rate: float = 0.0001,  # TODO: do we want to make the learning_rate configurable
+        learning_rate: float = 0.0001,
         num_classes: int = 3,
     ):
         super().__init__()
-        self.save_hyperparameters(ignore=["backbone"])
+
         if backbone is None:
             backbone = Backbone()
         self.model = backbone
+
+        self.learning_rate = learning_rate
 
         self.train_acc = torchmetrics.Accuracy(
             task="multiclass", num_classes=num_classes
@@ -169,7 +174,7 @@ class ImageClassifier(LightningModule):
         Returns:
             None
         """
-        loss, true_labels, predicted_labels = self._shared_step(batch)
+        _, true_labels, predicted_labels = self._shared_step(batch)
         self.test_acc(predicted_labels, true_labels)
         self.log("accuracy", self.test_acc)
 
@@ -185,8 +190,8 @@ class ImageClassifier(LightningModule):
         Returns:
             x (torch.Tensor): output from prediction step
         """
-        x, y = batch
-        return self(x)
+        features, _ = batch
+        return self(features)
 
     def configure_optimizers(self):
         """
@@ -199,5 +204,5 @@ class ImageClassifier(LightningModule):
             optimizer (Callable): optimizer used for model training
         """
         # self.hparams available because we called self.save_hyperparameters()
-        optimizer = torch.optim.AdamW(self.parameters(), lr=self.hparams.learning_rate)
+        optimizer = torch.optim.AdamW(self.parameters(), lr=self.learning_rate)
         return optimizer

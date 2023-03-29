@@ -1,3 +1,5 @@
+"""This package contains datasets for train, validation and test dataset."""
+
 import os
 from typing import Callable, Tuple
 
@@ -13,9 +15,12 @@ class PneumoniaDataset(Dataset):
 
     Args:
         image_folder (str): The path to the directory containing the images.
-        data (pd.DataFrame): A pandas DataFrame containing the file paths of the images and their labels.
-        inference_mode (bool): Specify if the dataset is used for inference or training. Defaults to False.
-        transform (Callable): A callable object that applies image augmentation on the input image. Defaults to None.
+        data (pd.DataFrame): A pandas DataFrame containing the file paths
+            of the images and their labels.
+        inference_mode (bool): Specify if the dataset is used for inference
+            or training. Defaults to False.
+        transform (Callable): A callable object that applies image augmentation
+            on the input image. Defaults to None.
 
     Returns:
         None
