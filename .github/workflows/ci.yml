@@ -25,20 +25,12 @@ jobs:
           python -m pip install --upgrade pip
           $CONDA/bin/conda env update --file conda-dev.yaml
           source /usr/share/miniconda/bin/activate xnn
+
+      - name: Lint with Pylint
+        run: |
           $CONDA/bin/conda info
-          $CONDA/bin/conda init bash
-          $CONDA/bin/conda info
-          source ~/.bashrc
-          $CONDA/bin/conda info
-          conda activate xnn
-          $CONDA/bin/conda info
-          conda info | grep -i 'base environment'
-      # - name: Lint with Pylint
-      #   run: |
-      #     source $CONDA_PREFIX/bin/activate && conda activate xnn
-      #     $CONDA/bin/conda info
-      #     pip install pylint pytest
-      #     pylint src --fail-under=7.0 --ignore=tests --disable=W1202
-      # - name: Test with pytest
-      #   run: |
-      #     pytest tests -v
+          pip install pylint pytest
+          pylint src --fail-under=7.0 --ignore=tests --disable=W1202
+      - name: Test with pytest
+        run: |
+          pytest tests -v
