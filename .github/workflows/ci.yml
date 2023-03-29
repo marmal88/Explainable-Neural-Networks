@@ -25,7 +25,7 @@ jobs:
           source ./bin/activate
           python -m pip install --upgrade pip
           $CONDA/bin/conda env update --file conda-dev.yaml
-          $CONDA/bin/conda init bash && $CONDA/bin/activate xnn
+          $CONDA/bin/conda init bash && source activate xnn
           $CONDA/bin/conda info
       # - name: Lint with Pylint
       #   run: |
