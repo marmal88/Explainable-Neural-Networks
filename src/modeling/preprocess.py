@@ -11,7 +11,7 @@ class ImageTransforms:
         image_size (int): size to crop image to.
 
     Returns:
-        transform (Callable): function to process image (e.g. augmentations).
+        None
     """
 
     def __init__(self, image_size: int = 224):

@@ -10,6 +10,19 @@ from .dataset import PneumoniaDataset
 
 
 class ImageClassificationDataModule(LightningDataModule):
+    """
+    Instantialises a LightningDataModule for loading and preprocessing image classification datasets.
+
+    Args:
+        train_image_folder (str): Path to the folder containing training images.
+        val_image_folder (str): Path to the folder containing validation images.
+        test_image_folder (str): Path to the folder containing test images.
+        meta_data_path (str): Path to the CSV file containing metadata for all images.
+        train_transform_img (Callable): Transformations to apply to training images.
+        test_transform_img (Callable): Transformations to apply to validation and test images.
+        batch_size (int): Number of samples in a batch. Defaults to 32.
+    """
+
     def __init__(
         self,
         train_image_folder: str,
@@ -50,15 +63,61 @@ class ImageClassificationDataModule(LightningDataModule):
         self.batch_size = batch_size
 
     def train_dataloader(self):
-        return DataLoader(
+        """
+        Creates DataLoader to iterate over the training dataset.
+
+        Args:
+            None
+
+        Returns:
+            data_loader (DataLoader): Dataloader with shuffling
+        """
+        data_loader = DataLoader(
             self.train_dataset, batch_size=self.batch_size, num_workers=4, shuffle=True
         )
+        return data_loader
 
     def val_dataloader(self):
-        return DataLoader(self.val_dataset, batch_size=self.batch_size, num_workers=4)
+        """
+        Creates DataLoader to iterate over the validation dataset.
+
+        Args:
+            None
+
+        Returns:
+            data_loader (DataLoader): Dataloader without shuffling
+        """
+        data_loader = DataLoader(
+            self.val_dataset, batch_size=self.batch_size, num_workers=4
+        )
+        return data_loader
 
     def test_dataloader(self):
-        return DataLoader(self.test_dataset, batch_size=self.batch_size, num_workers=4)
+        """
+        Creates DataLoader to iterate over the test dataset.
+
+        Args:
+            None
+
+        Returns:
+            data_loader (DataLoader): Dataloader without shuffling
+        """
+        data_loader = DataLoader(
+            self.test_dataset, batch_size=self.batch_size, num_workers=4
+        )
+        return data_loader
 
     def predict_dataloader(self):
-        return DataLoader(self.test_dataset, batch_size=self.batch_size, num_workers=4)
+        """
+        Creates DataLoader to iterate over the dataset.
+
+        Args:
+            None
+
+        Returns:
+            data_loader (DataLoader): Dataloader without shuffling
+        """
+        data_loader = DataLoader(
+            self.test_dataset, batch_size=self.batch_size, num_workers=4
+        )
+        return data_loader
