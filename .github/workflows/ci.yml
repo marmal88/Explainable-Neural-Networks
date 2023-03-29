@@ -31,7 +31,7 @@ jobs:
           $CONDA/bin/conda info
       - name: Lint with Pylint
         run: |
-          $CONDA/bin/activate xnn
+          source $CONDA_PREFIX/bin/activate && conda activate xnn
           $CONDA/bin/conda info
           pip install pylint pytest
           pylint src --fail-under=7.0 --ignore=tests --disable=W1202
