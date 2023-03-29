@@ -1,11 +1,32 @@
+from typing import Callable
+
 import torchvision.transforms as T
 
 
 class ImageTransforms:
+    """
+    Initialise an object of class ImageTransforms.
+
+    Args:
+        image_size (int): size to crop image to.
+
+    Returns:
+        transform (Callable): function to process image (e.g. augmentations).
+    """
+
     def __init__(self, image_size: int = 224):
         self.image_size = image_size
 
-    def train_transforms(self):
+    def train_transforms(self) -> Callable:
+        """
+        Creates image transformation function.
+
+        Args:
+            None
+
+        Returns:
+            transform (Callable): function to process image for train data.
+        """
         transform = T.Compose(
             [
                 T.Grayscale(3),
@@ -17,7 +38,16 @@ class ImageTransforms:
         )
         return transform
 
-    def test_transforms(self):
+    def test_transforms(self) -> Callable:
+        """
+        Creates image transformation function.
+
+        Args:
+            None
+
+        Returns:
+            transform (Callable): function to process image for validation/test data.
+        """
         transform = T.Compose(
             [
                 T.Grayscale(3),

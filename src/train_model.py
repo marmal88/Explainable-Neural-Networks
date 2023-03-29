@@ -14,7 +14,20 @@ from .modeling.preprocess import ImageTransforms
 
 @hydra.main(config_path="../conf/base", config_name="pipelines.yaml")
 def run(cfg: DictConfig) -> None:
+    """
+    This function runs the model training:
+      1) Creates image transformation
+      2) Creates the model and trainer
+      3) Prepares dataset and dataloader
+      4) Fits the model
+      5) Evaluates the model
 
+    Args:
+        cfg (DictConfig): configuration from pipelines.yaml
+
+    Returns:
+        None
+    """
     logging.info("Instantiating image transformation")
     train_transform_img = ImageTransforms(
         cfg.train.transforms.image_size
