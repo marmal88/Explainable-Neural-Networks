@@ -28,7 +28,6 @@ jobs:
           $CONDA/bin/conda info
       - name: Lint with Pylint
         run: |
-          $CONDA/bin/conda env update --file conda-dev.yaml
           source /usr/share/miniconda/bin/activate xnn
           $CONDA/bin/conda info
           pip install pylint pytest
