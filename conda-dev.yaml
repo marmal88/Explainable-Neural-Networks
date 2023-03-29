@@ -6,18 +6,18 @@ dependencies:
   - pip
   - pip:
       - pylint
-      - pytest-cov
-      - black
-      - ipykernel
-      - tqdm
-      - pre-commit
-      - hydra-core
-      - numpy
-      - pandas
-      - torch
-      - torchvision
-      - lightning[extra]
-      - jsonargparse[signatures]
-      - hydra-core==1.1.1
-      - hydra-optuna-sweeper==1.1.1
-      - optuna==2.10.0
+      # - pytest-cov
+      # - black
+      # - ipykernel
+      # - tqdm
+      # - pre-commit
+      # - hydra-core
+      # - numpy
+      # - pandas
+      # - torch
+      # - torchvision
+      # - lightning[extra]
+      # - jsonargparse[signatures]
+      # - hydra-core==1.1.1
+      # - hydra-optuna-sweeper==1.1.1
+      # - optuna==2.10.0
