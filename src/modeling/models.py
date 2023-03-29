@@ -38,21 +38,23 @@ class Backbone(nn.Module):
             nn.Linear(84, num_classes),
         )
 
-    def forward(self, input):
+    def forward(self, inp):
         """
         Forward propagation of the model.
 
         Args:
-            input (torch.Tensor): Input tensor of shape (batch size, number of channels, height, width)
+            inp (torch.Tensor): Input tensor of shape (batch size,
+                number of channels, height, width)
 
         Returns:
-            output (torch.Tensor): Output after forward propagation of shape (batch size, num_classes)
+            output (torch.Tensor): Output after forward propagation
+                of shape (batch size, num_classes)
         """
-        input = self.pool(F.relu(self.conv1(input)))
-        input = self.pool(F.relu(self.conv2(input)))
+        inp = self.pool(F.relu(self.conv1(inp)))
+        inp = self.pool(F.relu(self.conv2(inp)))
         # x = self.avgpool(x)
-        input = torch.flatten(input, 1)  # flatten all dimensions except batch
-        output = self.classifier(input)
+        inp = torch.flatten(inp, 1)  # flatten all dimensions except batch
+        output = self.classifier(inp)
         return output
 
 
@@ -140,10 +142,8 @@ class ImageClassifier(LightningModule):
         loss, true_labels, predicted_labels = self._shared_step(batch)
 
         self.log("train_loss", loss, on_epoch=True)
-        self.train_acc(predicted_labels, true_labels)
-        self.log(
-            "train_acc", self.train_acc, prog_bar=True, on_epoch=True, on_step=False
-        )
+        train_acc = self.train_acc(predicted_labels, true_labels)
+        self.log("train_acc", train_acc, prog_bar=True, on_epoch=True, on_step=False)
         return loss
 
     def validation_step(self, batch, batch_idx):
@@ -160,8 +160,8 @@ class ImageClassifier(LightningModule):
         loss, true_labels, predicted_labels = self._shared_step(batch)
 
         self.log("val_loss", loss, on_step=True)
-        self.val_acc(predicted_labels, true_labels)
-        self.log("val_acc", self.val_acc, prog_bar=True)
+        val_acc = self.val_acc(predicted_labels, true_labels)
+        self.log("val_acc", val_acc, prog_bar=True)
 
     def test_step(self, batch, batch_idx):
         """
@@ -175,8 +175,8 @@ class ImageClassifier(LightningModule):
             None
         """
         _, true_labels, predicted_labels = self._shared_step(batch)
-        self.test_acc(predicted_labels, true_labels)
-        self.log("accuracy", self.test_acc)
+        test_acc = self.test_acc(predicted_labels, true_labels)
+        self.log("test_accuracy", test_acc)
 
     def predict_step(self, batch, batch_idx, dataloader_idx=None):
         """
