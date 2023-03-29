@@ -25,8 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           $CONDA/bin/conda env update --file conda-dev.yaml
           source /usr/share/miniconda/bin/activate xnn
+          $CONDA/bin/conda info
           $CONDA/bin/conda init bash
+          $CONDA/bin/conda info
           source ~/.bashrc
+          $CONDA/bin/conda info
           conda activate xnn
           $CONDA/bin/conda info
           conda info | grep -i 'base environment'
