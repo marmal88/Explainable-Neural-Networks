@@ -24,7 +24,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           $CONDA/bin/conda env update --file conda-dev.yaml
-          $CONDA/bin/conda init bash && $CONDA/bin/activate xnn
+          source ~/miniconda3/bin/activate
+          $CONDA/bin/conda init bash
+          source ~/.bashrc
+          $CONDA/bin/activate xnn
           $CONDA/bin/conda info
           conda info | grep -i 'base environment'
       # - name: Lint with Pylint
