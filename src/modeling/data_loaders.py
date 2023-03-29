@@ -1,18 +1,19 @@
 import torchvision
+import torchvision.transforms as T
 from lightning.pytorch import LightningDataModule
 from torch.utils.data import DataLoader
-import torchvision.transforms as T
+
 
 class ImageClassificationDataModule(LightningDataModule):
     def __init__(
-            self,            
-            train_data_path: str,
-            validation_data_path: str,
-            test_data_path: str,
-            train_transform_img: T.Compose,
-            test_transform_img: T.Compose,
-            batch_size: int = 32,
-            ):
+        self,
+        train_data_path: str,
+        validation_data_path: str,
+        test_data_path: str,
+        train_transform_img: T.Compose,
+        test_transform_img: T.Compose,
+        batch_size: int = 32,
+    ):
         super().__init__()
         self.train_dataset = torchvision.datasets.ImageFolder(
             root=train_data_path, transform=train_transform_img
