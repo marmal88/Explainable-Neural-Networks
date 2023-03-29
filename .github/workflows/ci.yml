@@ -34,4 +34,4 @@ jobs:
           pylint src --fail-under=7.0 --ignore=tests --disable=W1202
       - name: Test with pytest
         run: |
-          pytest tests -v
+          pytest
