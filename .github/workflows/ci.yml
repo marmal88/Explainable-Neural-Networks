@@ -27,7 +27,7 @@ jobs:
           source /usr/share/miniconda/bin/activate
           $CONDA/bin/conda init bash
           source ~/.bashrc
-          $CONDA/bin/activate xnn
+          conda activate xnn
           $CONDA/bin/conda info
           conda info | grep -i 'base environment'
       # - name: Lint with Pylint
