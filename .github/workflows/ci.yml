@@ -24,7 +24,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           $CONDA/bin/conda env update --file conda-dev.yaml
-          source /usr/share/miniconda/envs/xnn/bin/activate
+          source /usr/share/miniconda/bin/activate
           $CONDA/bin/conda init bash
           source ~/.bashrc
           $CONDA/bin/activate xnn
