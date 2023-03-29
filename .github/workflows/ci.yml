@@ -27,7 +27,7 @@ jobs:
           $CONDA/bin/conda init bash
           $CONDA/bin/activate xnn
           echo $CONDA_DEFAULT_ENV
-          $CONDA/bin/conda info ==envs
+          $CONDA/bin/conda info --envs
       - name: Lint with Pylint
         run: |
           pip install pylint pytest
