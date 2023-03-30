@@ -9,3 +9,10 @@ dependencies:
       - numpy==1.24.1
       - pylint==2.15.0
       - pytest-cov==4.0.0
+      - torch
+      - torchvision
+      - lightning[extra]
+      - jsonargparse[signatures]
+      - hydra-core==1.1.1
+      - hydra-optuna-sweeper==1.1.1
+      - optuna==2.10.0
