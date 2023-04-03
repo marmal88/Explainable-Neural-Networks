@@ -13,6 +13,7 @@ from modeling.preprocess import ImageTransforms
 from omegaconf import DictConfig
 
 
+# pylint: disable=logging-fstring-interpolation
 @hydra.main(version_base=None, config_path="../conf/base", config_name="pipelines.yaml")
 def run(cfg: DictConfig) -> None:
     """
