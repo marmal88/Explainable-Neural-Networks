@@ -57,7 +57,6 @@ More information on precommit hook [here](https://pre-commit.com/).
 pre-commit install
 ```
 
-
 # FiftyOne
 
 FiftyOne is a widely used solution to quickly view multiple images for computer vision tasks. Please run the following commands in docker to view the data, data has already been tagged with both "normal", "bacteria" and "virus" images for quick comparison. 
@@ -107,7 +106,7 @@ t-Distributed Stochastic Neighbor Embedding (t-SNE) is an unsupervised, non-line
 - Dont see an issue you want? raise an issue [here](https://github.com/marmal88/Explainable-Neural-Networks/issues)
 
 ## Commit msg
-```
+```bash
 <type>: <short summary>
   │            │
   │            └─⫸ Summary in present tense. Not capitalized. No period at the end.
