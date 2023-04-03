@@ -6,11 +6,12 @@ import os
 import hydra
 from lightning.pytorch import Trainer
 from lightning.pytorch.loggers import CSVLogger
-from modeling.data_loaders import ImageClassificationDataModule
-from modeling.model_utils import create_model
-from modeling.models import ImageClassifier
-from modeling.preprocess import ImageTransforms
 from omegaconf import DictConfig
+
+from .modeling.data_loaders import ImageClassificationDataModule
+from .modeling.model_utils import create_model
+from .modeling.models import ImageClassifier
+from .modeling.preprocess import ImageTransforms
 
 
 # pylint: disable=logging-fstring-interpolation

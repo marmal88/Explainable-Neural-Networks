@@ -3,8 +3,9 @@
 import pandas as pd
 import torchvision.transforms as T
 from lightning.pytorch import LightningDataModule
-from modeling.dataset import PneumoniaDataset
 from torch.utils.data import DataLoader
+
+from .dataset import PneumoniaDataset
 
 
 class ImageClassificationDataModule(LightningDataModule):

@@ -7,7 +7,7 @@ import torch
 import torch.nn.functional as F
 import torchmetrics
 from lightning.pytorch import LightningModule
-from torch import nn as nn
+from torch import nn
 
 
 class Backbone(nn.Module):
