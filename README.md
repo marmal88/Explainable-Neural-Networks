@@ -106,7 +106,7 @@ t-Distributed Stochastic Neighbor Embedding (t-SNE) is an unsupervised, non-line
 - Dont see an issue you want? raise an issue [here](https://github.com/marmal88/Explainable-Neural-Networks/issues)
 
 ## Commit msg
-```
+```bash
 <type>: <short summary>
   │            │
   │            └─⫸ Summary in present tense. Not capitalized. No period at the end.
