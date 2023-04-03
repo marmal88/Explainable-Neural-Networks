@@ -6,15 +6,14 @@ import os
 import hydra
 from lightning.pytorch import Trainer
 from lightning.pytorch.loggers import CSVLogger
+from modeling.data_loaders import ImageClassificationDataModule
+from modeling.model_utils import create_model
+from modeling.models import ImageClassifier
+from modeling.preprocess import ImageTransforms
 from omegaconf import DictConfig
 
-from .modeling.data_loaders import ImageClassificationDataModule
-from .modeling.model_utils import create_model
-from .modeling.models import ImageClassifier
-from .modeling.preprocess import ImageTransforms
 
-
-@hydra.main(config_path="../conf/base", config_name="pipelines.yaml")
+@hydra.main(version_base=None, config_path="../conf/base", config_name="pipelines.yaml")
 def run(cfg: DictConfig) -> None:
     """
     This function runs the model training:
@@ -75,9 +74,13 @@ def run(cfg: DictConfig) -> None:
     logging.info("Training model")
     trainer.fit(model, datamodule=data_module)
 
-    train_acc = trainer.test(dataloaders=data_module.train_dataloader())[0]["accuracy"]
-    val_acc = trainer.test(dataloaders=data_module.val_dataloader())[0]["accuracy"]
-    test_acc = trainer.test(dataloaders=data_module.test_dataloader())[0]["accuracy"]
+    train_acc = trainer.test(dataloaders=data_module.train_dataloader())[0][
+        "test_accuracy"
+    ]
+    val_acc = trainer.test(dataloaders=data_module.val_dataloader())[0]["test_accuracy"]
+    test_acc = trainer.test(dataloaders=data_module.test_dataloader())[0][
+        "test_accuracy"
+    ]
 
     logging.info(
         f"Train Acc {train_acc*100:.2f}%"
