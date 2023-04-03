@@ -57,7 +57,6 @@ More information on precommit hook [here](https://pre-commit.com/).
 pre-commit install
 ```
 
-
 # FiftyOne
 
 FiftyOne is a widely used solution to quickly view multiple images for computer vision tasks. Please run the following commands in docker to view the data, data has already been tagged with both "normal", "bacteria" and "virus" images for quick comparison. 
