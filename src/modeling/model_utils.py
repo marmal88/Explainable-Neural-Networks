@@ -1,8 +1,11 @@
 """This package contains functions to instantialize a pre-trained neural network
 from torchvision for image classification."""
 
+import functools
+
+import torch
 import torchvision
-from torch import nn as nn
+from torch import nn
 
 
 def set_parameter_requires_grad(model, feature_extracting: bool = True):
@@ -19,6 +22,31 @@ def set_parameter_requires_grad(model, feature_extracting: bool = True):
     if feature_extracting:
         for param in model.parameters():
             param.requires_grad = False
+
+
+def get_layers(model: torch.nn.Module):
+    """get_layers"""
+    children = list(model.children())
+    return (
+        [model]
+        if len(children) == 0
+        else [ci for c in children for ci in get_layers(c)]
+    )
+
+
+def rgetattr(obj, attr, *args):
+    """rgetattr"""
+
+    def _getattr(obj, attr):
+        return getattr(obj, attr, *args)
+
+    return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def rsetattr(obj, attr, val):
+    """set and get attribute dynamically"""
+    pre, _, post = attr.rpartition(".")
+    return setattr(rgetattr(obj, pre) if pre else obj, post, val)
 
 
 def create_model(
@@ -38,7 +66,14 @@ def create_model(
         model (): A pre-trained neural network model with a custom output layer.
     """
     model = torchvision.models.get_model(model_name, weights=model_weights)
+
+    last_layer_name = [
+        name for name, _ in model.named_modules() if isinstance(model, torch.nn.Module)
+    ]
+
     set_parameter_requires_grad(model, feature_extracting=True)
-    num_ftrs = model.fc.in_features
-    model.fc = nn.Linear(num_ftrs, num_classes)
+    final_layer = get_layers(model)[-1]
+    num_ftrs = final_layer.in_features
+    head = nn.Linear(num_ftrs, num_classes)
+    rsetattr(model, last_layer_name[-1], head)
     return model
