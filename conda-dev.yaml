@@ -1,13 +1,13 @@
-name: xnn
+name: xnn-dev
 channels:
   - defaults
 dependencies:
-  - python=3.10
-  - pip
+  - python=3.10.9
+  - pip=23.0.1
   - pip:
       - pylint
       - pytest-cov
-      - black
+      - black==20.8b1
       - ipykernel
       - tqdm
       - pre-commit

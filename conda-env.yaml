@@ -1,4 +1,4 @@
-name: xnn
+name: xnn-env
 channels:
   - defaults
 dependencies:
