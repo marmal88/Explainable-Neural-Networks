@@ -77,3 +77,9 @@ def create_model(
     head = nn.Linear(num_ftrs, num_classes)
     rsetattr(model, last_layer_name[-1], head)
     return model
+
+
+def load_model(model, model_path):
+    checkpoint = torch.load(model_path)
+    model.load_state_dict(checkpoint["state_dict"])
+    return model

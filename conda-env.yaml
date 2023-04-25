@@ -16,3 +16,6 @@ dependencies:
       - hydra-core==1.1.1
       - hydra-optuna-sweeper==1.1.1
       - optuna==2.10.0
+      - streamlit==1.7.0
+      - click==7.1.2
+      - python-json-logger==2.0.4
