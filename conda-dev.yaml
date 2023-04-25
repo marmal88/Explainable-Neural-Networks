@@ -21,3 +21,6 @@ dependencies:
       - hydra-optuna-sweeper==1.1.1
       - optuna==2.10.0
       - grad-cam
+      - streamlit==1.7.0
+      - click==7.1.2
+      - python-json-logger==2.0.4

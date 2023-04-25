@@ -17,3 +17,6 @@ data_paths:
   val_data_path: "data/val"
   test_data_path: "data/test"
   meta_data_path: "data/dataset_remove_relative_path.csv"
+
+inference:
+  model_path: "outputs/2023-04-21/13-52-27/logs/xnn/version_0/checkpoints/epoch=0-step=163.ckpt"
