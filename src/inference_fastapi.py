@@ -33,7 +33,23 @@ def startup_event():
     Startup event trigger
     """
     logger.info("Starting server...")
-    # TODO: Try to load model and transforms on startup
+
+    # Load image model
+    logger.info("Loading model weights...")
+    model = ImageClassifier(
+        backbone=create_model(
+            num_classes=int(cfg.dataset.num_classes),
+            model_name=str(cfg.model.model_name),
+        ),
+        learning_rate=cfg.train.params.learning_rate,
+    )
+    app.model = load_model(model, cfg.inference.model_path)
+
+    # Load image transforms
+    logger.info("Loading image transforms...")
+    app.transform_img = ImageTransforms(
+        int(cfg.train.transforms.image_size)
+    ).test_transforms()
     logger.info("Server startup completed.")
 
 
@@ -53,29 +69,17 @@ async def predict(file: UploadFile):
     img = Image.open(io.BytesIO(contents))
 
     # Transform image
-    transform_img = ImageTransforms(
-        int(cfg.train.transforms.image_size)
-    ).test_transforms()
-    img = transform_img(img)
+    img = app.transform_img(img)
     img = img.resize(
         1, 3, cfg.train.transforms.image_size, cfg.train.transforms.image_size
     )
 
-    # Load image model
-    model = ImageClassifier(
-        backbone=create_model(
-            num_classes=int(cfg.dataset.num_classes),
-            model_name=str(cfg.model.model_name),
-        ),
-        learning_rate=cfg.train.params.learning_rate,
-    )
-    model = load_model(model, cfg.inference.model_path)
-
     # Predict class of image
-    model.eval()
+    app.model.eval()
     with torch.no_grad():
-        logits = model(img)
+        logits = app.model(img)
     pred_ind = torch.argmax(logits, dim=1)
+
     # TODO: manually code first, figure out where to put this later
     labels = ["bacteria", "normal", "virus"]
 
