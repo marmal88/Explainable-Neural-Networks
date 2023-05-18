@@ -1,12 +1,22 @@
+model:
+  model_name: "convnext_tiny"
+
 train:
   params:
     epochs: 1
     batch_size: 32
     learning_rate: 0.003
   transforms:
-    image_size: 224 
+    image_size: 224
+
+dataset:
+  num_classes: 3
 
 data_paths:
   train_data_path: "data/train"
-  validation_data_path: "data/val"
+  val_data_path: "data/val"
   test_data_path: "data/test"
+  meta_data_path: "data/dataset_remove_relative_path.csv"
+
+inference:
+  model_path: "outputs/2023-04-21/13-52-27/logs/xnn/version_0/checkpoints/epoch=0-step=163.ckpt"

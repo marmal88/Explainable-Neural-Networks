@@ -12,14 +12,17 @@ Following is the initial file structure.
 .
 ├── data
 │   ├── test
-│   │   ├── NORMAL
-│   │   └── PNEUMONIA
+│   │   ├── normal
+│   │   ├── bacteria
+│   │   └── virus
 │   ├── train
-│   │   ├── NORMAL
-│   │   └── PNEUMONIA
+│   │   ├── normal
+│   │   ├── bacteria
+│   │   └── virus
 │   └── val
-│       ├── NORMAL
-│       └── PNEUMONIA
+│       ├── normal
+│       ├── bacteria
+│       └── virus
 ├── conda-env.yaml
 ├── src
 ├── LICENSE
@@ -34,11 +37,11 @@ Following is the initial file structure.
 Curl down and unzip the data to the existing repositry using the command:
 ```bash
 # download using
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1BLViYnohD-S4u5p1DkXp1MOlCGe02w36' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1BLViYnohD-S4u5p1DkXp1MOlCGe02w36" -O pneumonia.zip && rm -rf /tmp/cookies.txt
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1VuaSBUw2MFTbobZ2ZcVjugVx-ey88xkF' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1VuaSBUw2MFTbobZ2ZcVjugVx-ey88xkF" -O pneumonia.zip && rm -rf /tmp/cookies.txt
 # Unzip using
 unzip -q pneumonia.zip .
 ```
-Alternatively download the dataset from [here](https://drive.google.com/file/d/1BLViYnohD-S4u5p1DkXp1MOlCGe02w36/view?usp=share_link).
+Alternatively download the dataset from [here](https://drive.google.com/file/d/1AOd7h3OWTlBTQc8Gq-gbgIBCqPDxsO6S/view?usp=share_link).
 
 2. Environment
 
@@ -53,7 +56,6 @@ More information on precommit hook [here](https://pre-commit.com/).
 ```bash
 pre-commit install
 ```
-
 
 # FiftyOne
 
@@ -84,13 +86,27 @@ docker container stop fiftyone
 docker rm fiftyone   
 ```
 
+# t-SNE
+
+t-Distributed Stochastic Neighbor Embedding (t-SNE) is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. In this project, a t-SNE vizualization has been created to better allow users to understand the images.
+
+<p align="center">
+  <img src="./assets/ResNet101/sprite.jpg" width="600" height="500">
+  <p style="text-align: center;">(Above) Image sprite showing the images being classified using RESNET embeddings</p>
+</p>
+<p align="center">
+  <img src="./assets/images/tsne.png" width="600" height="400">
+  <p style="text-align: center;">(Above) Tensorboard showing t-SNE clustering according to the categories "normal", "bacteria" and "virus". </p>
+</p>
+
+
 
 # Contributing
 - Outstanding features are listed in the project's kanban board [here](https://github.com/users/marmal88/projects/4/views/2)!
 - Dont see an issue you want? raise an issue [here](https://github.com/marmal88/Explainable-Neural-Networks/issues)
 
 ## Commit msg
-```
+```bash
 <type>: <short summary>
   │            │
   │            └─⫸ Summary in present tense. Not capitalized. No period at the end.
